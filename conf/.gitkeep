@@ -1,0 +1,3 @@
+`conf/` is empty after you download the repo.
+
+Put your '.pdec' files here and this program will automatically source them.

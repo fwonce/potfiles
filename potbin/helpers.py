@@ -90,8 +90,8 @@ def do_link(cloud, local):
     if path.islink(local) and path.realpath(local) == path.realpath(cloud):
         print('Untouched on', cloud, 'and', local)
         return
-    if path.exists(local):
-        # delete normal file target
+    if path.exists(local) or path.islink(local):
+        # delete the existing normal file target or obsolete link target
         os.remove(local)
     try:
         # uses symlink because there may be directories to be linked
