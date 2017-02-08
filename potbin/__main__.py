@@ -21,13 +21,14 @@ from operator import *
 from potbin.helpers import *
 
 
-def main():
+def process_pdec_file(file):
+    print("Processing pdec file:", file)
     try:
-        resources = open(RESOURCES_LIST, 'r')
+        pdec = open(file, 'r')
     except (FileNotFoundError, PermissionError):
         sys.exit('File ' + RESOURCES_LIST + ' cannot be found or read.')
-    with resources:
-        for line in resources:
+    with pdec:
+        for line in pdec:
             line = line.strip()
             # ignore comment lines
             if not line or line.startswith('#'):
@@ -64,6 +65,12 @@ def main():
                 do_link(cloud, local)
             elif COPY_MODE_DELIMITER == delimiter:
                 do_copy_on_newer(cloud, local)
+
+
+def main():
+    for file in os.listdir(PDEC_FILE_DIR):
+        if file.endswith(PDEC_FILE_EXT):
+            process_pdec_file(PDEC_FILE_DIR + file)
 
 
 if __name__ == "__main__":
