@@ -16,7 +16,7 @@ Prerequisites: Python3, appdirs (1.4.0).
 Let's go.
 
 0. Clone potfiles into any directory you want. `gti clone https://github.com/fwonce/potfiles.git`
-0. Put all your files needed to by synchronized under `potfiles/` (since potfiles will search resources under its working directory). You can organize them anyway you want, but here are two specific rational approachs:
+0. Put all your files needed to by synchronized under `potfiles/` (since potfiles will search resources under its working directory). You can organize them any way you want, but here are two specific rational approachs:
 	- Clone potfiles into your Dropbox (or whatnot) local directory. Thus anything you put under `potfiles/` will be synchronized in the first place, only belonging to you.
 	- Already a "dotfiles" user? Potfiles will get alone well with it. Just symlink your local dotfiles repo directory into `potfiles/`.
 0. Create a plain text file with ".pdec" extension under `potfiles/conf`, and write the mapping rules (see below) in it. ([Here]() is mine.)
@@ -27,7 +27,7 @@ A typical structure:
 ``` shell
 potfiles/
 	setup.py & potbin/				# the executable. leave them alone.
-	data/file						# the stuff you put under `potfiles/`, anyway you like.
+	data/file						# the stuff you put under `potfiles/`, any way you like.
 	conf/resources.pdec << EOLIST	# "EOLIST" has no special meaning, just for show the following content
 		data/file > /target/path	# line of a mapping rule
 	EOLIST
@@ -35,12 +35,10 @@ potfiles/
 
 Notes:
 
-0. You can put multiple ".pdec" files under `potfiles/conf` to make them more "modular", and all of them will be sourced automatically.
+0. You can put multiple pdec files under `potfiles/conf` to make them more "modular", and all of them will be sourced automatically.
 0. The left part of a mapping rule is relative (counted from potfiles/) path to your source file, and the right part is the real path it needs to be located to get your production software work.
 
 # The PotFiles DSL
-
-A mapping rule declaration file (referred as **pdec file** below) ends with ".pdec".
 
 ## Built-in path segment function
 
