@@ -1,5 +1,6 @@
 __author__ = 'fwonce'
 
+DEFAULT_LOCAL_LOCATION = '$userhome'
 PDEC_FILE_DIR = './conf/'
 PDEC_FILE_EXT = '.pdec'
 declared_segs={}

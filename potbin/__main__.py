@@ -38,15 +38,14 @@ def process_pdec_file(file):
                 continue
             if contains(line, COPY_MODE_DELIMITER):
                 delimiter = COPY_MODE_DELIMITER
-            elif contains(line, LINK_MODE_DELIMITER):
-                delimiter = LINK_MODE_DELIMITER
             else:
-                print('Skipping invalid line:', line)
-                continue
+                delimiter = LINK_MODE_DELIMITER
             pair = line.split(delimiter)
-            if 2 != len(pair):
+            if len(pair) > 2 or len(pair) < 1:
                 print('Skipping invalid line:', line)
                 continue
+            if 1 == len(pair):
+                pair.append(DEFAULT_LOCAL_LOCATION)
 
             cloud = pair[0].strip()
             local = pair[1].strip()
