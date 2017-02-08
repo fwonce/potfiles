@@ -2,7 +2,7 @@
 
 For those who spend many hours working with computers, it's always a significant demand to manage all configuration / resource files in one place and synchronize them across multiple computers. Cloud-based file hosting services, such as Dropbox and OneDrive, provide awesome reliability and security for synchronizing files, but what they can't provide is an effective and convenient mechanism to manage them - these files needs to be put back to the original directories within which the software behind them actually read.
 
-Many people creates a git repo hosting their dotfiles. But dotfiles are just a (small) portion of all stuff we want to manage. We have stencils of OmniGraffle. We have bits of extension configuration of Firefox which the integrated Sync doesn't care about. You can think of plenty of other use cases.
+Many people create a git repo hosting their dotfiles. But dotfiles are just a (small) portion of all stuff we want to manage. We have stencils of OmniGraffle. We have bits of extension configuration of Firefox which the integrated Sync doesn't care about. You can think of plenty of other use cases.
 
 So, the solution is **potfiles**. This tiny program provides a DSL to describe the mapping rules between the hosted files and real locations in your local harddisk. It's a general purpose manager not only for dotfiles. The name comes from "dotfiles", by rotating the letter 'd' until it becomes a 'p' :p, which apparently suggests it's quite different with the "dotfiles" methodology:
 
