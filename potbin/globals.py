@@ -2,7 +2,6 @@ __author__ = 'fwonce'
 
 PDEC_FILE_DIR = './conf/'
 PDEC_FILE_EXT = '.pdec'
-RESOURCES_LIST = './conf/resources.pdec'
 declared_segs={}
 
 LINK_MODE_DELIMITER = '>'

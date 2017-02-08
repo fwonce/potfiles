@@ -26,7 +26,7 @@ def process_pdec_file(file):
     try:
         pdec = open(file, 'r')
     except (FileNotFoundError, PermissionError):
-        sys.exit('File ' + RESOURCES_LIST + ' cannot be found or read.')
+        sys.exit('File ' + file + ' cannot be found or read.')
     with pdec:
         for line in pdec:
             line = line.strip()
