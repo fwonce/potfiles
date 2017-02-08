@@ -54,7 +54,7 @@ def parse_local(local):
 def parse_seg(seg, expanded_segs):
     # all segments that need further parsing contains '$'
     if not seg.startswith('$'):
-        return seg
+        return path.expanduser(seg)
     for parser in ALL_PARSERS:
         parsed_seg = parser.parse(seg, expanded_segs)
         if parsed_seg:

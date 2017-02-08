@@ -7,7 +7,7 @@
 #   - `|`: a vertical bar, means the cloud file is copied to the local path
 #   - `>`: means the cloud file is linked (symlink) to the local path
 # - Supported local path placeholders:
-#   - $userhome:
+#   - $userhome / ~:
 #       Home directory (This must be put at the beginning)
 #   - $appfolder(appname, appauther):
 #       AppData folder for given appname
