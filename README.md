@@ -4,13 +4,13 @@ For those who spend many hours working with computers, it's always a significant
 
 Many people create a git repo hosting their dotfiles. But dotfiles are just a (small) portion of all stuff we want to manage. We have stencils of OmniGraffle. We have bits of extension configuration of Firefox which the integrated Sync doesn't care about. You can think of plenty of other use cases.
 
-So, the solution is **potfiles**. This tiny program provides a DSL to describe the mapping rules between the hosted files and real locations in your local harddisk. It's a general purpose manager not only for dotfiles. The name comes from "dotfiles", by rotating the letter 'd' until it becomes a 'p' :p, which apparently suggests it's quite different with the "dotfiles" methodology:
+So, the solution is **potfiles**. This tiny program provides a DSL to describe the mapping rules between the hosted files and real locations in your local harddisk. The name comes from "dotfiles", by rotating the letter 'd' until it becomes a 'p' :p, which apparently suggests it's quite different with the "dotfiles" methodology:
 
 0. A dotfiles repo are usually showing or sharing the details of how the owners set up their software, which is cool, but not the purpose of this program. You can see the "potfiles" repo only contains the neccessary stuff and, by this `.gitignore`, it will exclude anything you put in.
-0. A dotfiles repo encourages you to fork it as your own copy, while this repo doesn't require you to fork it just because you want to git it work.
-0. A dotfiles repo that has its own synchronizing script is limited to synchronize files only in the home directory, while this program allows you to synchronize anything on your harddisk. This is useful since many software keep the configuration files other than home directory.
+0. A dotfiles repo encourages you to fork it as your own copy, while this repo doesn't require you to fork to git it work.
+0. A dotfiles repo is usually limited to synchronize files only in home directory, while this program allows you to synchronize anything on your harddisk.
 
-To sum up,  potfiles is a great supplement of file hosting solution for this very goal we bring up in the beginning. It's a missing piece of your cyber life arsenal, I hope. 
+To sum up,  potfiles is the general purpose version of dotfiles and a great supplement of file hosting solution for this very goal we bring up in the beginning. It's a missing piece of your cyber life arsenal, I hope. 
 
 # Get started
 
