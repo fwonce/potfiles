@@ -104,7 +104,10 @@ def do_link(cloud, local):
 def do_copy_on_newer(cloud, local):
     # find which one is more recently modified - the newer one
     cloud_mtime = path.getmtime(cloud)
-    local_mtime = path.getmtime(local)
+    if path.exists(local):
+        local_mtime = path.getmtime(local)
+    else:
+        local_mtime = 0
     if cloud_mtime == local_mtime:
         print('Untouched on', cloud, 'and', local)
         return
