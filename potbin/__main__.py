@@ -21,6 +21,12 @@ from operator import *
 from potbin.helpers import *
 
 
+def main():
+    for file in os.listdir(PDEC_FILE_DIR):
+        if file.endswith(PDEC_FILE_EXT):
+            process_pdec_file(PDEC_FILE_DIR + file)
+
+
 def process_pdec_file(file):
     print("Processing pdec file:", file)
     try:
@@ -49,7 +55,15 @@ def process_pdec_file(file):
 
             cloud = pair[0].strip()
             local = pair[1].strip()
-            if not path.exists(cloud):
+            clouds = []
+            if path.exists(cloud):
+                clouds.append(cloud)
+            elif cloud.endswith('*'):
+                cloud_search_dir = cloud[0:len(cloud) - 1]
+                if path.exists(cloud_search_dir):
+                    for c in os.listdir(cloud_search_dir):
+                        clouds.append(cloud_search_dir + c)
+            if len(clouds) < 1:
                 print('Skipping invalid cloud path:', cloud)
                 continue
             mark_sync_dir_if_needed(cloud)
@@ -58,18 +72,13 @@ def process_pdec_file(file):
             except InvalidSegmentException as e:
                 print('Skipping invalid local path:', local, ', due to', e.msg)
                 continue
-            local = append_basename_if_needed(cloud, local)
 
-            if LINK_MODE_DELIMITER == delimiter:
-                do_link(cloud, local)
-            elif COPY_MODE_DELIMITER == delimiter:
-                do_copy_on_newer(cloud, local)
-
-
-def main():
-    for file in os.listdir(PDEC_FILE_DIR):
-        if file.endswith(PDEC_FILE_EXT):
-            process_pdec_file(PDEC_FILE_DIR + file)
+            for c in clouds:
+                l = append_basename_if_needed(c, local)
+                if LINK_MODE_DELIMITER == delimiter:
+                    do_link(c, l)
+                elif COPY_MODE_DELIMITER == delimiter:
+                    do_copy_on_newer(c, l)
 
 
 if __name__ == "__main__":

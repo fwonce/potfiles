@@ -1,13 +1,11 @@
 # About
 
-**Potfiles** (similar to "dotfiles" but not the same) is a supplementary utility used with your favorite cloud-based file hosting solution (Dropbox, OneDrive or a ["dotfiles" repo](https://github.com/search?q=dotfiles), etc) to manage all your configuration/resource files in one place and synchronize them across multiple computers, in an effective and convenient manner. Before I explain why you may need it, consider these two things first:
+**Potfiles** (similar to "dotfiles" but not the same) is a supplementary utility intended to coordinate with your favorite cloud-based file hosting solution (Dropbox, OneDrive or even a ["dotfiles" repo](https://github.com/search?q=dotfiles), etc) to manage all your configuration/resource files in one place and synchronize them across multiple computers, in an effective and convenient manner. Using a file hosting solution doesn't get the job done because:
 
-1. File hosting services provide awesome reliability and security for synchronizing your files in a specific folder. But for our purpose, we need to put them back to the original directories within which the software behind them actually read, one by one. That's tedious and easy to fail.
-2. In a dotfiles repo, which I think is basically more like a place for sharing how to tweak those beloved software, there may be a script to link files back to home directory indeed. But there are also many other stuff we need located other than home directory. We have stencils of OmniGraffle. We have bits of extension configuration of Firefox which the integrated Sync doesn't care about. You can think of plenty of other use cases.
+1. Although it is awesome for synchronizing your files in a specific folder, we need to put them back to the original directories within which the software behind them actually read, one by one. That's tedious and easy to fail.
+2. In a dotfiles repo, which is basically more like a place for sharing tweaks of those beloved software, there may be a script to link files back to home directory indeed. But there are also many other stuff located other than home directory. Stencils of OmniGraffle,  keymap setting of your favorite IDE, bits of extension configuration of Firefox which the integrated Sync doesn't care about. You can think of plenty of other use cases.
 
-So, I think there need to be a file mapping tool as a complement to the perfect file synchronization tool-chain. Potfiles allows you to describe the mapping rules between the hosted files and the real locations in your local harddisk using a simple and self-explanatory DSL.
-
-May it be the missing piece of your cyber life arsenal :) 
+So there need to be a file mapping tool as a complement to file synchronization tool-chain. Potfiles allows you to describe the mapping rules between the hosted files and the real locations in your local harddisk using a simple and self-explanatory DSL. May it be the missing piece of your cyber life arsenal :)
 
 # Get started
 
@@ -27,9 +25,9 @@ A typical structure:
 ``` shell
 potfiles/
 	setup.py & potbin/				# the executable. leave them alone.
-	data/file						# the stuff you put under `potfiles/`, any way you like.
+	data/file						# the stuff you put under `potfiles/`
 	conf/resources.pdec << EOLIST	# "EOLIST" has no special meaning, just for show the following content
-		data/file > /target/path	# line of a mapping rule
+		data/file > /target/path	# a line of a mapping rule
 	EOLIST
 ```
 
@@ -78,6 +76,10 @@ The two parts is seperated be a mapping operator. There are two kinds of mapping
 - `|`: Copying. In some cases, the software cannot accept a link file as its underlying configuration / resource file, or it would rewrite it as a normal file after reading the original file content and deleting the link file. For example, Firefox 51's search engine configuration file (`search.json.mozlz4`) is like this. When copy operator used, the modification times of both source and target file will be compared to determine the copying direction. Be aware that in copy mode you produce replica and need to run `python(3) -m potbin` from time to time.
 
 ### Usages
+
+0. Link all stuff under a directory one by one to the target location. Just like dotfiles.
+	`dotfiles/* > ~`
+	Equivalents: `dotfiles/*` (omitting target)
 
 0. A simple one, putting a symbolic link to the given source into the home directory.
 	`data/.vimrc > ~/.vimrc`
