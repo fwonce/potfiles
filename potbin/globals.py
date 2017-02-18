@@ -9,3 +9,8 @@ LINK_MODE_DELIMITER = '>'
 COPY_MODE_DELIMITER = '|'
 
 SYNC_DIR_MARKER = '.sync_dir'
+
+IGNORE_FILES = [
+    SYNC_DIR_MARKER,
+    '.DS_Store'
+]

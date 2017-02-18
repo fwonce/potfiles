@@ -11,14 +11,12 @@ So there need to be a file mapping tool as a complement to file synchronization 
 
 Prerequisites: Python3, appdirs (1.4.0).
 
-Let's go.
-
 0. Clone potfiles into any directory you want. `gti clone https://github.com/fwonce/potfiles.git`
 0. Put all your files needed to by synchronized under `potfiles/` (since potfiles will search resources under its working directory). You can organize them any way you want, but here are two specific rational approachs:
 	- Clone potfiles into your Dropbox (or whatnot) local directory. Thus anything you put under `potfiles/` will be synchronized in the first place, only belonging to you.
 	- Already a "dotfiles" user? Potfiles will get alone well with it. Just symlink your local dotfiles repo directory into `potfiles/`.
 0. Create a plain text file with ".pdec" extension under `potfiles/conf`, and write the mapping rules (see below) in it. ([Here]() is mine.)
-0. Run the command `python(3) -m potbin` under `potfiles/`. Sit tight and watch.
+0. Run the command `python(3) -m potbin` under `potfiles/` and presto.
 
 A typical structure:
 

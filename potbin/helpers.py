@@ -35,14 +35,14 @@ def parse_custom_decl(line):
         return
     key = pair[0].strip()
     try:
-        value = parse_local(pair[1].strip())
+        value = parse_path(pair[1].strip())
         declared_segs[key] = value
         print('Cached custom declaration:', key, '=', value)
     except InvalidSegmentException as e:
         print('Skipping invalid custom declaration:', line, ', due to', e.msg)
 
 
-def parse_local(local):
+def parse_path(local):
     segs = local.split('/')
     expanded_segs = []
     for seg in segs:

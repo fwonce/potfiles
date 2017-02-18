@@ -53,7 +53,7 @@ def process_pdec_file(file):
             if 1 == len(pair):
                 pair.append(DEFAULT_LOCAL_LOCATION)
 
-            cloud = pair[0].strip()
+            cloud = parse_path(pair[0].strip())
             local = pair[1].strip()
             clouds = []
             if path.exists(cloud):
@@ -62,13 +62,15 @@ def process_pdec_file(file):
                 cloud_search_dir = cloud[0:len(cloud) - 1]
                 if path.exists(cloud_search_dir):
                     for c in os.listdir(cloud_search_dir):
+                        if c in IGNORE_FILES:
+                            continue
                         clouds.append(cloud_search_dir + c)
             if len(clouds) < 1:
                 print('Skipping invalid cloud path:', cloud)
                 continue
             mark_sync_dir_if_needed(cloud)
             try:
-                local = parse_local(local)
+                local = parse_path(local)
             except InvalidSegmentException as e:
                 print('Skipping invalid local path:', local, ', due to', e.msg)
                 continue

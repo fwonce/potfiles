@@ -4,6 +4,7 @@ from os import path
 import abc
 import appdirs
 import configparser
+import sys
 
 __author__ = 'fwonce'
 
@@ -63,10 +64,17 @@ class IniFileParser(SegmentParser):
                     except configparser.Error:
                         raise InvalidSegmentException('cannot read' + ini_path)
 
+
+class PlatformParser(SegmentParser):
+    def parse(self, seg, expanded_segs):
+        if '$sysplatform' == seg:
+            return sys.platform
+
 # Parser singletons
 ALL_PARSERS = [
     DeclParser(),
     HomeParser(),
     AppFolderParser(),
-    IniFileParser()
+    IniFileParser(),
+    PlatformParser()
 ]
