@@ -5,16 +5,14 @@
 1. Although it is awesome for synchronizing your files in a specific folder, we need to put them back to the original directories within which the software behind them actually read, one by one. That's tedious and easy to fail.
 2. In a dotfiles repo, which is basically more like a place for sharing tweaks of those beloved software, there may be a script to link files back to home directory indeed. But there are also many other stuff located other than home directory. Stencils of OmniGraffle,  keymap setting of your favorite IDE, bits of extension configuration of Firefox which the integrated Sync doesn't care about. You can think of plenty of other use cases.
 
-So there need to be a file mapping tool as a complement to file synchronization tool-chain. Potfiles allows you to describe the mapping rules between the hosted files and the real locations in your local harddisk using a simple and self-explanatory DSL. May it be the missing piece of your cyber life arsenal :)
+So there need to be a file location mapping tool as a complement to file synchronization tool-chain. Potfiles allows you to describe the mapping rules between the hosted files and the real locations in your local harddisk using a simple and self-explanatory DSL. May it be the missing piece of your cyber life arsenal :)
 
 # Get started
 
 Prerequisites: Python3, appdirs (1.4.0).
 
-0. Clone potfiles into any directory you want. `gti clone https://github.com/fwonce/potfiles.git`
-0. Put all your files needed to by synchronized under `potfiles/` (since potfiles will search resources under its working directory). You can organize them any way you want, but here are two specific rational approachs:
-	- Clone potfiles into your Dropbox (or whatnot) local directory. Thus anything you put under `potfiles/` will be synchronized in the first place, only belonging to you.
-	- Already a "dotfiles" user? Potfiles will get alone well with it. Just symlink your local dotfiles repo directory into `potfiles/`.
+0. Clone potfiles into any directory you want, typically the local directory of your favorite synchronization service like Dropbox, so they'll be synchronized automatically. `cd /path/to/local/dropbox; git clone https://github.com/fwonce/potfiles.git`
+0. Put all your files needed to be synchronized under the same directory (since potfiles will search resources under its working directory). Don't worry about these stuff will tamper the potfiles repo because all files except the potfiles source code are ignored in .gitignore. Already a "dotfiles" user? It's easy to make potfiles get alone well with it. Just symlink your local dotfiles repo directory into our potfiles directory.
 0. Create a plain text file with ".pdec" extension under `potfiles/conf`, and write the mapping rules (see below) in it. ([Here]() is mine.)
 0. Run the command `python(3) -m potbin` under `potfiles/` and presto.
 
@@ -23,15 +21,13 @@ A typical structure:
 ``` shell
 potfiles/
 	setup.py & potbin/				# the executable. leave them alone.
-	data/file						# the stuff you put under `potfiles/`
-	conf/resources.pdec << EOLIST	# "EOLIST" has no special meaning, just for show the following content
-		data/file > /target/path	# a line of a mapping rule
-	EOLIST
+	blah/blah/file						# all the stuff you put under `potfiles/`
+	conf/resources.pdec				# your mapping rules
 ```
 
 Notes:
 
-0. You can put multiple pdec files under `potfiles/conf` to make them more "modular", and all of them will be sourced automatically.
+0. You can put multiple pdec files under `conf/` to make them more "modular", and all of them will be sourced automatically.
 0. The left part of a mapping rule is relative (counted from potfiles/) path to your source file, and the right part is the real path it needs to be located to get your production software work.
 
 # The PotFiles DSL
@@ -90,12 +86,12 @@ The two parts is seperated be a mapping operator. There are two kinds of mapping
 
 0. The leading dot of a source file will make it more difficult to browse and find that file to some extends. You can use a underscore '_' to replace it and the program will automatically replace it back at runtime. So here's another equivalent:
 	`data/_vimrc`
-	
+
 0. If the target file name is quite unclear about what it means, for good reasons you would store the source file in your cloud repo with a different semantic file name.
 	`data/my_dash_snippet_library.dash > $appfolder('Dash', 'Kapeli')/library.dash`
 
 0. Mapping directories is needed off course because mapping single files one by one is tedious and inappropriate sometimes.
-	`data/.vim > ~/.vim` 
+	`data/.vim > ~/.vim`
 	Just like file mapping, these are equivalents of the above one:
 	`data/.vim > ~`, `data/_vim > ~` & `data/_vim`
 	Target directory name changing for unclear target basename also works:
@@ -111,4 +107,3 @@ The two parts is seperated be a mapping operator. There are two kinds of mapping
 
 - The ultimate object is to provide a framework for setting up a workstation conforms to your habit and needs in one run. So other actions such as installing your must-have brew/pip/npm packages will be welcome.
 - System-specific sync folders for Linux, Mac, Windows.
-
